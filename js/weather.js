@@ -68,7 +68,7 @@ function initWeather () {
     }
 
     async function getSearchLocations (locationQuery) {
-        const url = 'http://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address';
+        const url = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address';
         const _token = '52fd0d81d9acc4a4ba2cf6a967f3b0e56077d231';
         const options = {
             method: 'POST',
