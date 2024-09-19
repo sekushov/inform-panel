@@ -1,0 +1,52 @@
+@media(max-width: 1000px)
+    html
+        font-size: 16px
+    .container
+        flex-direction: column
+        padding: 20px
+    .aside-block
+        padding: 0
+    .dateTime
+        width: 250px
+        height: 200px
+        margin-top: 0
+        padding: 0
+    .forecast
+        width: 250px
+        height: 200px
+        &__location
+            min-height: 30px
+            &-list
+                top: 30px
+                padding: 10px
+                font-size: 0.8rem
+        &__input
+            height: 30px
+    .todo
+        width: 100%
+        margin-top: 50px
+    
+@media (min-width: 600px) and (max-width: 1000px)
+        .aside-block
+            flex-direction: row
+            justify-content: space-evenly
+            flex-wrap: wrap
+            width: 100%
+    
+@media(max-width: 600px)
+    html
+        font-size: 14px
+    .container
+        padding: 20px 10px
+        margin: 0
+    .forecast 
+        width: 300px
+        height: 180px
+        &__location-list
+            font-size: 1rem
+    .dateTime
+        width: 300px
+        height: 100px
+        margin-top: 20px
+    .todo
+        padding: 30px

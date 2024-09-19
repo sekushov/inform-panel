@@ -1,0 +1,4 @@
+initWeather();
+initSlider();
+initDateTime();
+initTodo();

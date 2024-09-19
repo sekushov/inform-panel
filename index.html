@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Momentum</title><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="aside-block">
+            <div class="forecast">
+                <div class="forecast__container block">
+                    <div class="forecast__location">
+                        <div class="forecast__search">
+                            <input type="text" id="input_location" class="forecast__input" placeholder="Населенный пункт" autocomplete="off">
+                            <ul id="locations" class="forecast__location-list"></ul> 
+                        </div>
+                        <div class="forecast__location-title"></div>
+                        <div class="forecast__search-trigger"><img src="./img/search.png" alt="search"></div>
+                    </div>
+                    <div class="forecast__temp"></div>
+                    <div class="forecast__weather-icon"></div>
+                    <div class="forecast__weather-title"></div>   
+                </div>
+            </div>
+            
+            <div class="dateTime block">
+                <div class="dateTime__time"></div>
+                <div class="dateTime__dateBlock">
+                    <div class="dateTime__day"></div>
+                    ,&nbsp
+                    <div class="dateTime__date"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="todo block">
+            <h2 class="todo__title">Задачи</h2>
+            <input type="text" class="todo__input" placeholder="Новая задача">
+            <ul class="todo__list"></ul>
+            <button class="todo__removeAllBtn">Удалить выполненные</button>
+        </div>
+    </div>
+
+    <div class="background"></div>
+    <script src="./js/weather.js"></script>
+    <script src="./js/slider.js"></script>
+    <script src="./js/dateTime.js"></script>
+    <script src="./js/todo.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>
