@@ -4,11 +4,22 @@ function initWeather () {
     const locationUl = document.querySelector('#locations');
     const localityEl = document.querySelector('.forecast__location-title');
     const searchTrigger = document.querySelector('.forecast__search-trigger');
+    let locality = localStorage.getItem('locality') ? localStorage.getItem('locality') : 'Краснодар';;
+    const coord = localStorage.getItem('coord-lat') ? [localStorage.getItem('coord-lat'), localStorage.getItem('coord-lon')] : [45.040216, 38.975996];    // krasnodar
 
-    const coord =  localStorage.getItem('coord-lat') ? [localStorage.getItem('coord-lat'), localStorage.getItem('coord-lon')] : [45.040216, 38.975996];   // krasnodar
-    let locality = localStorage.getItem('locality') ? localStorage.getItem('locality') : 'Краснодар';
-
+    (async function getGeoLocation () {
+        navigator.geolocation.getCurrentPosition(async position => {
+            //  СДЕЛАТЬ RETURN POSITION.COORDS
+            coord[0] = position.coords.latitude;
+            coord[1] = position.coords.longitude;
+            const address = await getAddresByCoords(coord);
+            const validAddress = await address.suggestions[0].data;
+            locality = await validAddress.settlement ? await validAddress.settlement : await validAddress.city;
+            setWeather();
+        });
+    })()
     setWeather();
+
     searchTrigger.addEventListener('click', () => {
         showSearchPanel();
         locationInput.addEventListener('input', (e) => setSearchLocations(e.target.value));
@@ -65,6 +76,31 @@ function initWeather () {
         const locationArray = await getSearchLocations(query);
         showLocations(locationArray);
         locationUl.style.display = 'block';
+    }
+
+    async function getAddresByCoords (coords) {
+        const url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address";
+        const token = "52fd0d81d9acc4a4ba2cf6a967f3b0e56077d231";
+        const query = { lat: coords[0], lon: coords[1] };
+        const options = {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": "Token " + token
+            },
+            body: JSON.stringify(query)
+        }
+        let address;
+        try {
+            address = await fetch(url, options)
+                .then(responce => responce.json());
+        } catch(error) {
+            console.log('error', error);
+            address = '';
+        }
+        return address
     }
 
     async function getSearchLocations (locationQuery) {

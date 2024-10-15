@@ -39,7 +39,9 @@
 
         <div class="todo block">
             <h2 class="todo__title">Задачи</h2>
-            <input type="text" class="todo__input" placeholder="Новая задача">
+            <form id="todo-form">
+                <input name="newTask" type="text" class="todo__input" placeholder="Новая задача">
+            </form>
             <ul class="todo__list"></ul>
             <button class="todo__removeAllBtn">Удалить выполненные</button>
         </div>

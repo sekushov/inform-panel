@@ -1,5 +1,6 @@
 function initTodo () {
-    const todoInput = document.querySelector('.todo__input');
+    const inputForm = document.querySelector('#todo-form');
+    const todoInput = inputForm.querySelector('.todo__input');
     const listEl = document.querySelector('.todo__list');
     const removeAllBtn = document.querySelector('.todo__removeAllBtn');
 
@@ -14,9 +15,10 @@ function initTodo () {
     renderTodoList();
 
     // добавление задачи
-    todoInput.addEventListener('keydown', (e) => {
-        if (e.key !== 'Enter') return
-        if (!e.target.value) {
+    inputForm.onsubmit = (e) => {
+        e.preventDefault();
+        const newTask = new FormData(inputForm).get('newTask');
+        if (!newTask) {
             todoInput.classList.add('todo__input__wrong');
             todoInput.setAttribute('placeholder', 'Заполните поле');
             setTimeout(() => {
@@ -25,19 +27,18 @@ function initTodo () {
             }, 1000);
             return
         }
-        todoArray.push({title: e.target.value});
+        todoArray.push({title: newTask});
+        inputForm.reset();
         renderTodoList();
-    });
+    };
 
     
     // рендер списка, выполняется при каждом изменении списка
     function renderTodoList () {
-        console.log('render');
         // записываем данные в localstorage
         localStorage.setItem('todoArray', JSON.stringify(todoArray))
 
         // сбрасываем данные
-        todoInput.value = '';
         listEl.innerHTML = '';
         // записываем новые данные
         todoArray.forEach((item, i) => {
